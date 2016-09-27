@@ -160,6 +160,10 @@ class WebViewMock : WKWebView {
         self.testClosure = testClosure
         super.init(frame: frame, configuration: configuration)
     }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadRequest(request: NSURLRequest) -> WKNavigation? {
         testClosure?(request)
@@ -320,7 +324,7 @@ class DeeplinkRequestingBehaviorMock : DeeplinkRequestingBehavior {
     }
 }
 
-@objc class LoginManagerPartialMock : LoginManager {
+class LoginManagerPartialMock : LoginManager {
     
     var executeLoginClosure: (() -> ())?
     
@@ -333,7 +337,7 @@ class DeeplinkRequestingBehaviorMock : DeeplinkRequestingBehavior {
     }
 }
 
-@objc class NativeAuthenticatorPartialMock : NativeAuthenticator {
+class NativeAuthenticatorPartialMock : NativeAuthenticator {
     
     var handleRedirectClosure: ((NSURLRequest) -> (Bool))?
     
